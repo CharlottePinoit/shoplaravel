@@ -30,6 +30,13 @@ Route::resource('categories', CategoryController::class);
 //partie 2 exercice 3
 Route::get('products', [ProductController::class, 'index'])->name('products.index');
 
+//bonus partie 2 message personnalisé si authentifié
+Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('profile');
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+
+
 
 // !!à mettre en tout dernier!!
 //route fallback pour les pages non trouvées 404

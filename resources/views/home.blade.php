@@ -1,8 +1,12 @@
 @extends('layouts.app')
 @section('title',$boutique['nom'])
-@section('content')
 
-<h1>Bienvenue au {{ $boutique['nom'] }} !</h1>
+@section('page_title')
+Bienvenue au {{ $boutique['nom'] }} !
+@endsection
+
+
+@section('content')
 <p>Nous avons actuellement {{ $boutique['produits'] }} produits en stock.</p>
 
 @if($boutique['etat'] === 'ouvert')

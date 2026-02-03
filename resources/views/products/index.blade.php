@@ -1,21 +1,17 @@
 @extends('layouts.app')
 @section('title', 'Nos produits - ')
+
+
+@section('page_title', 'Nos Produits')
+
 @section('content')
-
-
-<h1>Nos produits</h1>{{-- @extends('layouts.app')--}}
-
-<ul>
-    @forelse($products as $product)
-    <li>
-        {{ $product['name'] }} — {{ $product['price'] }}g
-        <img
-            src="{{ asset('images/' . $product['image']) }}"
-            alt="{{ $product['name'] }}"
-            width="100">
-    </li>
-    @empty
-    <li>Aucun produit disponible.</li>
-    @endforelse
-</ul>
+<div class="grid grid-cols-3 gap-4">
+    @foreach($products as $product)
+    <x-product-card
+        :id="$product['id']"
+        :name="$product['name']"
+        :price="$product['price']"
+        :image="$product['image']" />
+    @endforeach
+</div>
 @endsection

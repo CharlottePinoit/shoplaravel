@@ -27,7 +27,7 @@ class PageController extends Controller
     //méthode pour la page a propos
     public function about()
     {
-        return 'Magasin général de Pierre, votre boutique de proximité!';
+        return view('about');
     }
     public function contact()
     {
