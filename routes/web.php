@@ -6,17 +6,13 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 //partie 1
 //exo 1
 Route::get('/hello', function () {
     return 'Hello Laravel!';
 });
 //exo 2 controller
-Route::get('/home', [PageController::class, 'home'])->name('home');
+Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('product.show')->whereNumber('id'); //n'accepte que des nombres
 //bonus partie 1
@@ -31,6 +27,8 @@ Route::resource('categories', CategoryController::class);
 //pas de / devant categories
 //car ici laravel génère automatiquement les routes du CRUD pour la ressource "categories" en ajoutant lui même le /devant
 
+//partie 2 exercice 3
+Route::get('products', [ProductController::class, 'index'])->name('products.index');
 
 
 // !!à mettre en tout dernier!!
