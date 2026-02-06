@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     //méthode pour afficher les détails d'un produit
-    public function show($id)
+    public function show(Product $product)
     {
-        return "détails du produit n°$id";
+        return "détails du produit n°$product->id";
     }
     public function index()
     {

@@ -14,7 +14,7 @@ Route::get('/hello', function () {
 //exo 2 controller
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
-Route::get('/products/{id}', [ProductController::class, 'show'])->name('product.show')->whereNumber('id'); //n'accepte que des nombres
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('product.show')->whereNumber('id'); //n'accepte que des nombres
 //bonus partie 1
 route::prefix('admin')->name('admin')->group(function () {
     //route tableau de bord
@@ -45,6 +45,6 @@ Route::fallback(function () {
         <h1><img src="/images/point_exclamation.png" alt="Page 404" style="max-width:400px;">Page non trouvée !</h1>
         <p>Vous allez être redirigé vers l\'accueil dans 5 secondes...</p>
         <a href="/">Cliquez ici si la redirection ne fonctionne pas</a>
-        <meta http-equiv="refresh" content="5;url=/home">
+        <meta http-equiv="refresh" content="5;url=/">
     ';
 });
