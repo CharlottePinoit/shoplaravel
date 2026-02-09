@@ -3,7 +3,7 @@
     <h3 class="product-name">{{ $name }}</h3>
     <p class="product-price">{{ $price }}g</p>
     <x-badge color="green">Nouveau</x-badge>
-    <a href="{{ route('product.show', ['id' => $id]) }}" class="product-link">
+    <a href="{{ route('product.show', ['product' => $id]) }}" class="product-link">
         Voir le produit
     </a>
 </div>

@@ -14,7 +14,8 @@ Route::get('/hello', function () {
 //exo 2 controller
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
-Route::get('/products/{product}', [ProductController::class, 'show'])->name('product.show')->whereNumber('id'); //n'accepte que des nombres
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('product.show')->whereNumber('product'); //n'accepte que des nombres
 //bonus partie 1
 route::prefix('admin')->name('admin')->group(function () {
     //route tableau de bord
