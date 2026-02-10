@@ -1,7 +1,9 @@
+@props(['id', 'name', 'price', 'image', 'category'])
 <div class="product-card">
     <img src="{{ asset('images/' . $image) }}" alt="{{ $name }}" class="product-image">
     <h3 class="product-name">{{ $name }}</h3>
     <p class="product-price">{{ $price }}g</p>
+    <p>Catégorie : {{ $category->name ?? 'Aucune' }}</p>
     <x-badge color="green">Nouveau</x-badge>
     <a href="{{ route('products.show', ['product' => $id]) }}" class="product-link">
         Voir le produit

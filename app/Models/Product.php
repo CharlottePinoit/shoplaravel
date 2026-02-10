@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
+use App\Models\Category;
 
 class Product extends Model
 {
@@ -43,5 +45,10 @@ class Product extends Model
         }
 
         $this->attributes['slug'] = $slug;
+    }
+    // partie 6 : relation avec la catégorie
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 }

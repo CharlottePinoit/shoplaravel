@@ -118,3 +118,21 @@ margin-left: 5px;
 .delete-button:hover {
 background-color: #f06262;
 }
+.stardew-button {
+display: inline-block;
+background-color: #f7d57d; /* jaune pastel */
+color: #5c3317;
+text-decoration: none;
+font-weight: bold;
+padding: 6px 12px;
+border: 2px solid #a0522d;
+border-radius: 4px;
+box-shadow: inset 1px 1px 0 #fff;
+font-family: 'Courier New', monospace;
+margin: 5px 0;
+transition: background 0.2s;
+}
+
+.stardew-button:hover {
+background-color: #f0c65e;
+}

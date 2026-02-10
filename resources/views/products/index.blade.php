@@ -7,7 +7,7 @@
 @section('content')
     <div class="grid grid-cols-3 gap-4">
         @foreach ($products as $product)
-            <x-product-card :id="$product->id" :name="$product->name" :price="$product->price" :image="$product->image" />
+            <x-product-card :id="$product->id" :name="$product->name" :price="$product->price" :image="$product->image" :category="$product->category" />
         @endforeach
     </div>
     <a href="{{ route('products.create') }}" class="product-link add-product-btn">
