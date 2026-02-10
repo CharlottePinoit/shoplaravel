@@ -14,8 +14,9 @@ Route::get('/hello', function () {
 //exo 2 controller
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-Route::get('/products/{product}', [ProductController::class, 'show'])->name('product.show')->whereNumber('product'); //n'accepte que des nombres
+// plus besoin car dans le resource product 
+//Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+//Route::get('/products/{product}', [ProductController::class, 'show'])->name('product.show')->whereNumber('product'); //n'accepte que des nombres
 //bonus partie 1
 route::prefix('admin')->name('admin')->group(function () {
     //route tableau de bord
@@ -28,8 +29,9 @@ Route::resource('categories', CategoryController::class);
 //pas de / devant categories
 //car ici laravel génère automatiquement les routes du CRUD pour la ressource "categories" en ajoutant lui même le /devant
 
-//partie 2 exercice 3
-Route::get('products', [ProductController::class, 'index'])->name('products.index');
+//partie 5 exo 1 crud de products
+Route::resource('products', ProductController::class);
+
 
 //bonus partie 2 message personnalisé si authentifié
 Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('profile');
