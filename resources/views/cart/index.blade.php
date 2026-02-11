@@ -16,7 +16,7 @@
                     <tr>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->price }}g</td>
-                        <td>{{ $product->quantity }}</td>
+
                         <td>
                             <form action="{{ route('cart.update', $product) }}" method="POST">
                                 @csrf

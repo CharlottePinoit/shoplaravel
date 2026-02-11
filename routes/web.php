@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 
@@ -36,12 +39,20 @@ Route::resource('categories', CategoryController::class);
 Route::resource('products', ProductController::class);
 
 //bonus partie 2 message personnalisé si authentifié
-Route::get('/profile', [ProfileController::class, 'index'])
+Route::middleware('guest')->group(function () {
+    //formulaire d'inscription
+    Route::get('/register', [RegisterController::class, 'showForm'])->name('register');
+    Route::post('/register', [RegisterController::class, 'register']);
+
+    //formulaire de connexion
+    Route::get('/login', [LoginController::class, 'showForm'])->name('login');
+    Route::post('/login', [LoginController::class, 'login']);
+});
+
+//Route de déconnexion accessible uniquement aux utilisateurs connectés
+Route::post('/logout', [LogoutController::class, 'logout'])
     ->middleware('auth')
-    ->name('profile');
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+    ->name('logout');
 
 //Partie 7 panier
 Route::prefix('cart')
