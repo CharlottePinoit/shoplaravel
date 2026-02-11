@@ -16,4 +16,8 @@
         @method('DELETE')
         <button type="submit" class="product-link delete-button">🗑️ Supprimer</button>
     </form>
+    <form action="{{ route('cart.add', $product) }}" method="POST">
+        @csrf
+        <button type="submit" class="stardew-button">Ajouter au panier</button>
+    </form>
 </div>

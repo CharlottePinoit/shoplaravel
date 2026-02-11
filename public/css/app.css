@@ -212,3 +212,29 @@ transition: background 0.2s;
 form button:hover {
 background-color: #f0c65e;
 }
+
+/*Style pour le panier*/
+.cart-link {
+position: relative;
+display: inline-block;
+}
+
+.cart-icon {
+width: 50px; /* ajuste selon ton icône */
+height: 50px;
+}
+
+.cart-count {
+position: absolute;
+top: -8px;
+right: -8px;
+background-color: #c3f8ff; /* rouge pastel style Stardew */
+color: #000001;
+border: 2px solid #2d6ca0;
+border-radius: 50%;
+padding: 2px 6px;
+font-size: 0.8rem;
+font-weight: bold;
+font-family: 'Courier New', monospace;
+box-shadow: 2px 2px 0 #699fd1;
+}

@@ -17,6 +17,10 @@
                 <form action="{{ route('logout') }}" method="POST" style="display:inline;">@csrf <button
                         type="submit">Déconnexion</button></form>@endauth @guest <a
                 href="{{ route('login') }}">Connexion</a><a href="{{ route('register') }}">Inscription</a>@endguest
+            <a href="{{ route('cart.index') }}" class="cart-link">
+                <img src="{{ asset('images/panier.png') }}" alt="Panier" class="cart-icon">
+                <span class="cart-count">{{ array_sum(session('cart', [])) }}</span>
+            </a>
         </nav>
     </header>
     <h1>@yield('page_title', 'Bienvenue au Magasin général de Pierre')</h1>

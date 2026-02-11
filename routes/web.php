@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 
 //partie 1
@@ -14,16 +15,18 @@ Route::get('/hello', function () {
 //exo 2 controller
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
-// plus besoin car dans le resource product 
+// plus besoin car dans le resource product
 //Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 //Route::get('/products/{product}', [ProductController::class, 'show'])->name('product.show')->whereNumber('product'); //n'accepte que des nombres
 //bonus partie 1
-route::prefix('admin')->name('admin')->group(function () {
-    //route tableau de bord
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    //route liste des utilisateurs
-    Route::get('/users', [AdminController::class, 'users'])->name('users');
-});
+route::prefix('admin')
+    ->name('admin')
+    ->group(function () {
+        //route tableau de bord
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+        //route liste des utilisateurs
+        Route::get('/users', [AdminController::class, 'users'])->name('users');
+    });
 //bonus parti 1
 Route::resource('categories', CategoryController::class);
 //pas de / devant categories
@@ -32,14 +35,24 @@ Route::resource('categories', CategoryController::class);
 //partie 5 exo 1 crud de products
 Route::resource('products', ProductController::class);
 
-
 //bonus partie 2 message personnalisé si authentifié
-Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('profile');
+Route::get('/profile', [ProfileController::class, 'index'])
+    ->middleware('auth')
+    ->name('profile');
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 
-
+//Partie 7 panier
+Route::prefix('cart')
+    ->name('cart.')
+    ->group(function () {
+        Route::get('/', [CartController::class, 'index'])->name('index');
+        Route::post('/add/{product}', [CartController::class, 'add'])->name('add');
+        Route::patch('/update/{product}', [CartController::class, 'update'])->name('update');
+        Route::delete('/remove/{product}', [CartController::class, 'remove'])->name('remove');
+        Route::delete('/clear', [CartController::class, 'clear'])->name('clear');
+    });
 
 // !!à mettre en tout dernier!!
 //route fallback pour les pages non trouvées 404
