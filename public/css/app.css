@@ -85,7 +85,7 @@ margin-bottom: 10px;
 }
 
 .product-link,
-button {
+.stardew-button {
 display: inline-block;
 background-color: #f7d57d; /* jaune pastel */
 color: #5c3317; /* brun foncé pour le texte */
@@ -103,10 +103,11 @@ transition: background 0.2s;
 button:hover {
 background-color: #f0c65e; /* légèrement plus clair au hover */
 }
+
 .delete-button {
 background-color: #f28c8c; /* rouge pastel */
 color: #5c1f1f;
-border: 2px solid #a0522d;
+
 padding: 6px 12px;
 font-family: 'Courier New', monospace;
 font-weight: bold;
@@ -117,7 +118,7 @@ margin-left: 5px;
 
 .delete-button:hover {
 background-color: #f06262;
-}
+} */
 .stardew-button {
 display: inline-block;
 background-color: #f7d57d; /* jaune pastel */
@@ -134,5 +135,80 @@ transition: background 0.2s;
 }
 
 .stardew-button:hover {
+background-color: #f0c65e;
+}
+/* Formulaire style pixel / Stardew Valley */
+.stardew-form {
+background-color: #fff3c4; /* jaune pastel */
+border: 4px solid #f7d57d; /* bordure pixel épaisse */
+border-radius: 8px;
+padding: 20px;
+max-width: 400px;
+margin: 20px auto;
+font-family: 'Courier New', monospace;
+box-shadow: 4px 4px 0 #f7d57d; /* effet relief */
+}
+
+.stardew-form div {
+margin-bottom: 15px;
+}
+
+.stardew-form label {
+font-weight: bold;
+color: #a0522d;
+display: block;
+margin-bottom: 5px;
+}
+
+.stardew-form input[type="text"],
+.stardew-form input[type="number"],
+.stardew-form textarea,
+.stardew-form select {
+width: 100%;
+padding: 6px;
+border: 2px solid #a0522d;
+border-radius: 4px;
+box-shadow: inset 1px 1px 0 #fff; /* style pixel */
+font-family: 'Courier New', monospace;
+font-size: 14px;
+}
+
+.stardew-form input[type="checkbox"] {
+margin-right: 5px;
+transform: scale(1.2); /* checkbox un peu plus grosse pour style pixel */
+}
+
+.stardew-form textarea {
+resize: vertical;
+min-height: 80px;
+}
+
+form .error {
+color: #621b1b;
+background-color: #f8d7da;
+border: 2px solid #d36e6e;
+padding: 4px 8px;
+margin-top: 4px;
+border-radius: 4px;
+box-shadow: 2px 2px 0 #d36e6e;
+font-size: 13px;
+}
+
+/* Bouton de formulaire */
+form button {
+display: inline-block;
+background-color: #f7d57d; /* jaune pastel */
+color: #5c3317; /* brun foncé */
+text-decoration: none;
+font-weight: bold;
+padding: 6px 12px;
+border: 2px solid #a0522d;
+border-radius: 4px;
+box-shadow: inset 1px 1px 0 #fff;
+font-family: 'Courier New', monospace;
+cursor: pointer;
+transition: background 0.2s;
+}
+form button:hover {
 background-color: #f0c65e;
 }

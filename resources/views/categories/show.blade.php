@@ -4,7 +4,7 @@
     <h2>{{ $category->description ?? 'Pas de description disponible' }}</h2>
     <div class="products-list">
         @foreach ($products as $product)
-            <x-product-card :id="$product->id" :name="$product->name" :price="$product->price" :image="$product->image" :category="$category" />
+            <x-product-card :product="$product" />
         @endforeach
     </div>
 
