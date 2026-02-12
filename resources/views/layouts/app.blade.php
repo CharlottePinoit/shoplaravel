@@ -16,7 +16,7 @@
             <a href="{{ route('about') }}">À propos</a>
             <a href="{{ route('products.index') }}">Nos Produits</a>
             @auth
-                <span class="welcome-text">Bonjour {{ auth()->user()->name }} !</span>
+
                 <a href="{{ route('profile') }}">Mon profil</a>
                 <form action="{{ route('logout') }}" method="POST" class="logout-form">
                     @csrf
@@ -31,7 +31,11 @@
                 <img src="{{ asset('images/panier.png') }}" alt="Panier" class="cart-icon">
                 <span class="cart-count">{{ array_sum(session('cart', [])) }}</span>
             </a>
+            @auth
+                <span class="welcome-text">Bonjour {{ auth()->user()->first_name }} !</span>
+            @endauth
         </nav>
+
     </header>
     <div class="content-area">
         <h1>@yield('page_title', 'Bienvenue au Magasin général de Pierre')</h1>

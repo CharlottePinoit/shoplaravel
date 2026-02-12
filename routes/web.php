@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProfileController;
 
 //partie 1
 //exo 1
@@ -53,9 +54,13 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [LogoutController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+});
 
 //Partie 7 panier
-Route::prefix('cart')
+Route::middleware('auth')
+    ->prefix('cart')
     ->name('cart.')
     ->group(function () {
         Route::get('/', [CartController::class, 'index'])->name('index');

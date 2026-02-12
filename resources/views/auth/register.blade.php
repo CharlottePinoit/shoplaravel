@@ -10,9 +10,17 @@
             @csrf
 
             <div>
-                <label for="name">Nom :</label>
-                <input type="text" id="name" name="name" value="{{ old('name') }}" required autofocus>
-                @error('name')
+                <label for="first_name">Prénom :</label>
+                <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" required autofocus>
+                @error('first_name')
+                    <div class="error">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div>
+                <label for="last_name">Nom :</label>
+                <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" required>
+                @error('last_name')
                     <div class="error">{{ $message }}</div>
                 @enderror
             </div>

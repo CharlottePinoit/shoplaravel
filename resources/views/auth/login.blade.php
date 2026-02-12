@@ -3,6 +3,12 @@
 @section('page_title', 'Connexion')
 @section('content')
 
+
+    @if (session('success'))
+        <div class="success">{{ session('success') }}</div>
+    @endif
+
+
     <div class="stardew-form">
 
         <form method="POST" action="{{ route('login') }}">

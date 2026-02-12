@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -17,23 +18,30 @@ class LoginController extends Controller
     // Traite la connexion
     public function login(Request $request)
     {
-        // 1️⃣ Validation des données
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        //Validation des données
+        $credentials = $request->validate(
+            [
+                'email' => ['required', 'email'],
+                'password' => ['required'],
+            ],
+            [
+                'email.required' => 'L’adresse e-mail est obligatoire.',
+                'email.email' => 'Veuillez entrer une adresse e-mail valide.',
+                'password.required' => 'Le mot de passe est obligatoire.',
+            ],
+        );
 
-        // 2️⃣ Tentative de connexion
+        //Tentative de connexion
         $remember = $request->boolean('remember'); // coche "se souvenir de moi"
         if (Auth::attempt($credentials, $remember)) {
-            // 3️⃣ Connexion réussie → régénérer la session
+            //Connexion réussie → régénérer la session
             $request->session()->regenerate();
 
-            // 4️⃣ Rediriger vers la page précédente ou accueil
+            //Rediriger vers la page précédente ou accueil
             return redirect()->intended('/')->with('success', 'Connexion réussie !');
         }
 
-        // 5️⃣ Échec → retour au formulaire avec erreur
+        //Échec → retour au formulaire avec erreur
         return back()
             ->withErrors([
                 'email' => 'Ces identifiants ne correspondent pas à nos enregistrements.',
