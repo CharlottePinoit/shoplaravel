@@ -3,13 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 //partie 1
 //exo 1
@@ -23,21 +26,25 @@ Route::get('/about', [PageController::class, 'about'])->name('about');
 //Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 //Route::get('/products/{product}', [ProductController::class, 'show'])->name('product.show')->whereNumber('product'); //n'accepte que des nombres
 //bonus partie 1
-route::prefix('admin')
+/* route::prefix('admin')
     ->name('admin')
     ->group(function () {
         //route tableau de bord
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         //route liste des utilisateurs
         Route::get('/users', [AdminController::class, 'users'])->name('users');
-    });
+    }); */
 //bonus parti 1
 Route::resource('categories', CategoryController::class);
 //pas de / devant categories
 //car ici laravel génère automatiquement les routes du CRUD pour la ressource "categories" en ajoutant lui même le /devant
 
+//partie 8 protection des routes admins avant séparation des controllers
+/* Route::middleware(['auth', 'admin'])->group(function () {
+    Route::resource('products', ProductController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
+});
 //partie 5 exo 1 crud de products
-Route::resource('products', ProductController::class);
+Route::resource('products', ProductController::class)->except(['create', 'store', 'edit', 'update', 'destroy']); */
 
 //bonus partie 2 message personnalisé si authentifié
 Route::middleware('guest')->group(function () {
@@ -69,6 +76,25 @@ Route::middleware('auth')
         Route::delete('/remove/{product}', [CartController::class, 'remove'])->name('remove');
         Route::delete('/clear', [CartController::class, 'clear'])->name('clear');
     });
+
+//partie 8 des Admins après séparation des controllers
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['auth', 'admin'])
+    ->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::resource('products', AdminProductController::class);
+
+        Route::resource('categories', AdminCategoryController::class);
+
+        Route::resource('users', AdminUserController::class);
+    });
+
+// Routes front produits
+Route::resource('products', ProductController::class)->only(['index', 'show']);
+// Routes front categories
+Route::resource('categories', CategoryController::class)->only(['index', 'show']);
 
 // !!à mettre en tout dernier!!
 //route fallback pour les pages non trouvées 404

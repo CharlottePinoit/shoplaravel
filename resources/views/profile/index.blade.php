@@ -9,6 +9,14 @@
 
         <p><strong>Email :</strong> {{ $user->email }}</p>
 
+        @auth
+            @if (auth()->user()->is_admin)
+                <a href="{{ route('admin.dashboard') }}" class="stardew-button">
+                    Accéder au tableau de bord
+                </a>
+            @endif
+        @endauth
+
         <p>Ma page profil en construction…</p>
     </div>
 @endsection

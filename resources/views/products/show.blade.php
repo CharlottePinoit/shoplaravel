@@ -17,8 +17,22 @@
             Voir les autres produits de cette catégorie
         </a>
     @endif
+    @auth
+        @if (auth()->user()->is_admin)
+            <a href="{{ route('products.edit', $product->id) }}" class="product-link">
+                ✏️ Modifier
+            </a>
 
+            <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;"
+                onsubmit="return confirm('Voulez-vous vraiment supprimer ce produit ?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="product-link delete-button">🗑️ Supprimer</button>
+            </form>
+        @endif
+    @endauth
     <a href="{{ route('products.index') }}" class="stardew-button">
         Retour à la liste des produits
     </a>
+
 @endsection
