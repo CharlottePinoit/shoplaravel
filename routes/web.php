@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\OrderController;
+
 
 //partie 1
 //exo 1
@@ -95,6 +97,14 @@ Route::prefix('admin')
 Route::resource('products', ProductController::class)->only(['index', 'show']);
 // Routes front categories
 Route::resource('categories', CategoryController::class)->only(['index', 'show']);
+
+//Partie 9 commandes
+Route::middleware('auth')->group(function () {
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+});
+
 
 // !!à mettre en tout dernier!!
 //route fallback pour les pages non trouvées 404
